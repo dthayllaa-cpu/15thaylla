@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thaylla faz 15 anos 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #E8487A;
+    --rose-light: #f5a8c3;
+    --rose-pale: #fde8f0;
+    --orange: #F97316;
+    --orange-light: #FCA96B;
+    --yellow: #FBBF24;
+    --yellow-light: #FDE68A;
+    --cream: #FFF8F0;
+    --gold: #D4A853;
+    --text-dark: #3a1a28;
+    --text-mid: #7a3a50;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    padding: 2rem;
+    background: linear-gradient(160deg, #fff0f6 0%, #fce7d0 40%, #fff3d0 100%);
+  }
+
+  /* Animated blobs */
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.45;
+    animation: drift 8s ease-in-out infinite alternate;
+  }
+  .blob-1 { width: 500px; height: 500px; background: radial-gradient(circle, #f9a8d4, #fb923c); top: -120px; left: -100px; animation-delay: 0s; }
+  .blob-2 { width: 400px; height: 400px; background: radial-gradient(circle, #fde68a, #f9a8d4); bottom: -80px; right: -80px; animation-delay: -3s; }
+  .blob-3 { width: 300px; height: 300px; background: radial-gradient(circle, #fb923c, #fde68a); top: 50%; left: 60%; animation-delay: -5s; }
+
+  @keyframes drift {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(30px, -30px) scale(1.08); }
+  }
+
+  /* Floating petals */
+  .petal {
+    position: absolute;
+    width: 12px; height: 18px;
+    border-radius: 50% 50% 50% 10%;
+    opacity: 0;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.7; }
+    90%  { opacity: 0.4; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  .hero-content { position: relative; z-index: 2; }
+
+  .hero-eyebrow {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 0.8rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.3s ease forwards;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4.5rem, 14vw, 10rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 0.9;
+    color: var(--rose);
+    text-shadow: 0 4px 30px rgba(232,72,122,0.18);
+    opacity: 0;
+    animation: fadeUp 1s 0.5s ease forwards;
+  }
+
+  .hero-15 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    font-weight: 400;
+    color: var(--orange);
+    letter-spacing: 0.12em;
+    margin-top: 0.4rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.7s ease forwards;
+  }
+
+  .hero-divider {
+    width: 120px; height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 2rem auto;
+    opacity: 0;
+    animation: fadeUp 1s 0.9s ease forwards;
+  }
+
+  .hero-date-block {
+    opacity: 0;
+    animation: fadeUp 1s 1.1s ease forwards;
+  }
+
+  .hero-date {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 4vw, 2.4rem);
+    font-style: italic;
+    color: var(--text-dark);
+  }
+
+  .hero-time {
+    font-size: 0.9rem;
+    letter-spacing: 0.3em;
+    color: var(--text-mid);
+    margin-top: 0.3rem;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--rose-light);
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  .scroll-hint span { writing-mode: vertical-rl; }
+  .scroll-hint::after {
+    content: '';
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--rose-light), transparent);
+  }
+  @keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:1} }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── FLOWER BANNER ── */
+  .flower-strip {
+    width: 100%;
+    background: linear-gradient(90deg, var(--rose) 0%, var(--orange) 50%, var(--yellow) 100%);
+    padding: 0.6rem 2rem;
+    text-align: center;
+    font-size: 1.6rem;
+    letter-spacing: 0.5rem;
+    overflow: hidden;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--orange);
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-dark);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-body {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: var(--text-mid);
+    font-weight: 300;
+  }
+
+  /* ── CARD GRID ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .info-card {
+    background: white;
+    border: 1px solid rgba(232,72,122,0.15);
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 24px rgba(232,72,122,0.07);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .info-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--rose), var(--orange), var(--yellow));
+  }
+  .info-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(232,72,122,0.16);
+  }
+
+  .card-icon { font-size: 2rem; margin-bottom: 0.8rem; display: block; }
+
+  .card-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 0.5rem;
+  }
+
+  .card-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    line-height: 1.4;
+  }
+
+  /* ── DRESS CODE ── */
+  .dress-section {
+    background: linear-gradient(135deg, #fff0f6 0%, #fff3e0 100%);
+    padding: 5rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .dress-section::before {
+    content: '🌸';
+    position: absolute;
+    font-size: 8rem;
+    opacity: 0.07;
+    top: -1rem;
+    right: -1rem;
+    filter: blur(2px);
+  }
+
+  .dress-note {
+    display: inline-block;
+    background: white;
+    border: 1.5px solid var(--rose-light);
+    border-radius: 50px;
+    padding: 0.6rem 2rem;
+    font-size: 0.82rem;
+    letter-spacing: 0.2em;
+    color: var(--rose);
+    margin-top: 1.5rem;
+    font-weight: 400;
+  }
+
+  /* ── ROSA EXCLUSIVA ── */
+  .rosa-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--rose);
+    color: white;
+    border-radius: 50px;
+    padding: 0.5rem 1.5rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-top: 1.5rem;
+  }
+
+  /* ── GIFTS ── */
+  .gift-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  .pill {
+    background: white;
+    border: 1.5px solid var(--rose-light);
+    border-radius: 50px;
+    padding: 0.6rem 1.4rem;
+    font-size: 0.88rem;
+    color: var(--text-mid);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    transition: all 0.25s ease;
+  }
+  .pill:hover {
+    background: var(--rose);
+    border-color: var(--rose);
+    color: white;
+    transform: scale(1.05);
+  }
+
+  /* ── COUNTDOWN ── */
+  .countdown-section {
+    background: linear-gradient(135deg, var(--rose) 0%, var(--orange) 60%, var(--yellow) 100%);
+    padding: 5rem 2rem;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .countdown-section::after {
+    content: '✦ ✦ ✦';
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    letter-spacing: 1rem;
+    opacity: 0.4;
+  }
+
+  .countdown-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    font-weight: 300;
+    opacity: 0.9;
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.1em;
+  }
+
+  .countdown-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .count-box {
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    min-width: 90px;
+  }
+
+  .count-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    display: block;
+  }
+
+  .count-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin-top: 0.4rem;
+    display: block;
+  }
+
+  /* ── SPOTIFY ── */
+  .spotify-section {
+    padding: 5rem 2rem;
+    text-align: center;
+    background: white;
+  }
+
+  .spotify-embed {
+    margin-top: 2rem;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(232,72,122,0.15);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .spotify-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    background: #1DB954;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 0.9rem 2rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    font-weight: 400;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 4px 20px rgba(29,185,84,0.3);
+  }
+  .spotify-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(29,185,84,0.45);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--text-dark);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 2.5rem 2rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+  }
+  footer span { color: var(--rose-light); }
+
+  /* ── FLORAL DECOR ── */
+  .floral-img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid white;
+    box-shadow: 0 12px 40px rgba(232,72,122,0.2);
+    position: absolute;
+  }
+  .floral-cluster {
+    position: relative;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+  }
+
+  /* Section dividers */
+  .wavy-divider {
+    width: 100%; overflow: hidden; line-height: 0;
+  }
+  .wavy-divider svg { display: block; }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RSVP ── */
+  .rsvp-section {
+    padding: 6rem 2rem;
+    background: linear-gradient(160deg, #fff0f6 0%, #fff8ee 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .rsvp-section::before {
+    content: '🌸';
+    position: absolute;
+    font-size: 12rem;
+    opacity: 0.05;
+    top: -2rem; left: -2rem;
+    pointer-events: none;
+  }
+  .rsvp-section::after {
+    content: '🌺';
+    position: absolute;
+    font-size: 10rem;
+    opacity: 0.05;
+    bottom: -2rem; right: -2rem;
+    pointer-events: none;
+  }
+
+  .rsvp-box {
+    max-width: 520px;
+    margin: 3rem auto 0;
+    background: white;
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 20px 60px rgba(232,72,122,0.1);
+    border: 1px solid rgba(232,72,122,0.12);
+    position: relative;
+    overflow: hidden;
+  }
+  .rsvp-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--rose), var(--orange), var(--yellow));
+  }
+
+  .rsvp-field {
+    width: 100%;
+    background: #fdf6f9;
+    border: 1.5px solid rgba(232,72,122,0.2);
+    border-radius: 12px;
+    padding: 0.85rem 1.1rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    outline: none;
+    -webkit-appearance: none;
+  }
+  .rsvp-field:focus {
+    border-color: var(--rose);
+    box-shadow: 0 0 0 3px rgba(232,72,122,0.1);
+  }
+  .rsvp-field::placeholder { color: #c4a0b0; }
+
+  .rsvp-toggle {
+    display: flex;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  .toggle-btn {
+    flex: 1;
+    padding: 0.8rem;
+    border: 1.5px solid rgba(232,72,122,0.25);
+    border-radius: 12px;
+    background: #fdf6f9;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-weight: 400;
+  }
+  .toggle-btn.selected-yes {
+    background: var(--rose);
+    border-color: var(--rose);
+    color: white;
+    box-shadow: 0 4px 16px rgba(232,72,122,0.3);
+  }
+  .toggle-btn.selected-no {
+    background: var(--text-mid);
+    border-color: var(--text-mid);
+    color: white;
+  }
+  .toggle-btn:hover:not(.selected-yes):not(.selected-no) {
+    border-color: var(--rose);
+    background: var(--rose-pale);
+  }
+
+  .rsvp-submit {
+    width: 100%;
+    background: linear-gradient(135deg, var(--rose), var(--orange));
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 1rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s;
+    box-shadow: 0 6px 24px rgba(232,72,122,0.3);
+    margin-top: 0.5rem;
+    font-weight: 400;
+  }
+  .rsvp-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 32px rgba(232,72,122,0.4);
+  }
+  .rsvp-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .rsvp-field-label {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 0.4rem;
+    text-align: left;
+  }
+
+  .rsvp-success {
+    display: none;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+  .rsvp-success-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+  .rsvp-success h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-style: italic;
+    color: var(--rose);
+    margin-bottom: 0.5rem;
+  }
+  .rsvp-success p { color: var(--text-mid); font-size: 0.9rem; line-height: 1.7; }
+
+  .rsvp-error {
+    display: none;
+    background: #fff0f0;
+    border: 1px solid #f5a8a8;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    color: #b33;
+    font-size: 0.85rem;
+    margin-top: 0.8rem;
+    text-align: left;
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    .count-box { min-width: 70px; padding: 1rem 1.2rem; }
+    .count-num { font-size: 2.2rem; }
+    .hero-name { font-size: clamp(3.5rem, 16vw, 6rem); }
+    .rsvp-box { padding: 2rem 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- FLOATING PETALS (JS-generated) -->
+
+<!-- HERO -->
+<section class="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">✦ &nbsp; você está convidada(o) &nbsp; ✦</p>
+    <h1 class="hero-name">Thaylla</h1>
+    <p class="hero-15">faz &nbsp;&nbsp; 15 &nbsp;&nbsp; anos</p>
+    <div class="hero-divider"></div>
+    <div class="hero-date-block">
+      <p class="hero-date">12 de junho de 2026</p>
+      <p class="hero-time">⟡ &nbsp; 18h00 &nbsp; ⟡</p>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>role para baixo</span>
+  </div>
+</section>
+
+<!-- GRADIENT FLOWER STRIP -->
+<div class="flower-strip">
+  🌸 &nbsp; 🌼 &nbsp; 🌷 &nbsp; 🌺 &nbsp; 🌸 &nbsp; 🌼 &nbsp; 🌷 &nbsp; 🌺 &nbsp; 🌸 &nbsp; 🌼 &nbsp; 🌷 &nbsp; 🌺
+</div>
+
+<!-- COUNTDOWN -->
+<div class="countdown-section">
+  <p class="countdown-title">faltam apenas…</p>
+  <div class="countdown-grid">
+    <div class="count-box"><span class="count-num" id="cd-days">--</span><span class="count-label">dias</span></div>
+    <div class="count-box"><span class="count-num" id="cd-hours">--</span><span class="count-label">horas</span></div>
+    <div class="count-box"><span class="count-num" id="cd-mins">--</span><span class="count-label">minutos</span></div>
+    <div class="count-box"><span class="count-num" id="cd-secs">--</span><span class="count-label">segundos</span></div>
+  </div>
+</div>
+
+<!-- INFO CARDS -->
+<section class="section reveal">
+  <p class="section-label">📍 detalhes da festa</p>
+  <h2 class="section-title">Tudo que você precisa saber</h2>
+  <div class="card-grid">
+    <div class="info-card">
+      <span class="card-icon">📅</span>
+      <p class="card-label">data</p>
+      <p class="card-value">12 de Junho<br>de 2026</p>
+    </div>
+    <div class="info-card">
+      <span class="card-icon">🕕</span>
+      <p class="card-label">horário</p>
+      <p class="card-value">18h00</p>
+    </div>
+    <div class="info-card">
+      <span class="card-icon">🏛️</span>
+      <p class="card-label">local</p>
+      <p class="card-value">Salão de Festas<br>Condomínio Raveo</p>
+    </div>
+  </div>
+</section>
+
+<!-- DRESS CODE -->
+<div class="dress-section reveal">
+  <div style="max-width:600px; margin:0 auto;">
+    <p class="section-label">👗 dress code</p>
+    <h2 class="section-title">Traje Esporte Fino</h2>
+    <p class="section-body">Vista o seu melhor look para a noite! Apareça elegante e confortável para celebrar junto com a Thaylla nessa noite especial.</p>
+    <div class="rosa-tag">
+      🌸 &nbsp; Rosa é a cor exclusiva da aniversariante
+    </div>
+    <br>
+    <span class="dress-note">por favor, evite usar rosa nessa noite 🥰</span>
+  </div>
+</div>
+
+<!-- GIFTS -->
+<section class="section reveal">
+  <p class="section-label">🎁 sugestão de presentes</p>
+  <h2 class="section-title">Ideias com muito carinho</h2>
+  <p class="section-body">Qualquer presente será recebido com todo o amor! Mas se quiser uma ajudinha, aqui vão algumas dicas:</p>
+  <div class="gift-pills">
+    <span class="pill">👗 Roupas — tam. P ou M</span>
+    <span class="pill">👟 Calçados — tam. 37–38</span>
+    <span class="pill">💄 Maquiagens</span>
+    <span class="pill">🌹 Perfumes</span>
+  </div>
+</section>
+
+<!-- FLOWER STRIP 2 -->
+<div class="flower-strip" style="background: linear-gradient(90deg, var(--yellow) 0%, var(--orange) 50%, var(--rose) 100%);">
+  🌺 &nbsp; 🌷 &nbsp; 🌼 &nbsp; 🌸 &nbsp; 🌺 &nbsp; 🌷 &nbsp; 🌼 &nbsp; 🌸 &nbsp; 🌺 &nbsp; 🌷 &nbsp; 🌼 &nbsp; 🌸
+</div>
+
+<!-- SPOTIFY -->
+<section class="spotify-section reveal">
+  <p class="section-label">🎵 a playlist da festa</p>
+  <h2 class="section-title">Vibe garantida</h2>
+  <p class="section-body">A noite tem trilha sonora! Clique abaixo para ouvir antes e chegar já no clima 🌸 A música central é <em>Teenage Dream</em>.</p>
+
+  <div class="spotify-embed">
+    <iframe
+      src="https://open.spotify.com/embed/playlist/7nOvgNPp513YZG18UsEf96?utm_source=generator&theme=0"
+      width="100%"
+      height="352"
+      frameborder="0"
+      allowfullscreen=""
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy">
+    </iframe>
+  </div>
+
+  <a class="spotify-btn" href="https://open.spotify.com/playlist/7nOvgNPp513YZG18UsEf96" target="_blank">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.371-.721.49-1.101.24-3.021-1.858-6.832-2.278-11.322-1.237-.418.098-.85-.17-.948-.59-.098-.418.17-.85.59-.948 4.907-1.122 9.117-.63 12.53 1.43.37.24.49.72.251 1.105zm1.47-3.27c-.29.459-.904.6-1.364.31-3.457-2.127-8.728-2.742-12.822-1.5-.503.15-1.034-.138-1.183-.64-.15-.503.138-1.034.64-1.183 4.673-1.42 10.482-.74 14.432 1.73.458.29.6.903.297 1.283zm.13-3.4C15.24 8.347 8.64 8.13 4.974 9.217c-.598.18-1.232-.15-1.41-.748-.18-.6.15-1.233.748-1.411 4.24-1.29 11.28-1.04 15.72 1.559.535.316.707 1.004.391 1.539-.316.534-.995.707-1.53.394z"/></svg>
+    Abrir no Spotify
+  </a>
+</section>
+
+<!-- RSVP -->
+<section class="rsvp-section reveal" id="confirmar">
+  <p class="section-label">✉️ confirmação de presença</p>
+  <h2 class="section-title">Você vai estar lá?</h2>
+  <p class="section-body">Confirme sua presença até <strong>27 de maio</strong> para garantirmos seu lugar nessa noite especial 🌸</p>
+
+  <div class="rsvp-box">
+    <div id="rsvp-form-area">
+      <label class="rsvp-field-label">seu nome</label>
+      <input class="rsvp-field" id="rsvp-name" type="text" placeholder="Como você se chama?">
+
+      <label class="rsvp-field-label">confirmação</label>
+      <div class="rsvp-toggle">
+        <button class="toggle-btn" id="btn-yes" onclick="selectRSVP('sim')">🎉 &nbsp; Sim, vou!</button>
+        <button class="toggle-btn" id="btn-no"  onclick="selectRSVP('nao')">😢 &nbsp; Não poderei ir</button>
+      </div>
+
+      <div id="acompanhantes-area" style="display:none">
+        <label class="rsvp-field-label">acompanhantes (opcional)</label>
+        <input class="rsvp-field" id="rsvp-guests" type="text" placeholder="Quantas pessoas virão com você?">
+      </div>
+
+      <label class="rsvp-field-label">mensagem para a Thaylla (opcional)</label>
+      <textarea class="rsvp-field" id="rsvp-msg" rows="3" placeholder="Deixe um carinho para a aniversariante 💕" style="resize:none; font-family:'Lato',sans-serif;"></textarea>
+
+      <button class="rsvp-submit" id="rsvp-btn" onclick="submitRSVP()">Confirmar presença ✦</button>
+      <div class="rsvp-error" id="rsvp-error"></div>
+    </div>
+
+    <div class="rsvp-success" id="rsvp-success">
+      <div class="rsvp-success-icon" id="rsvp-success-icon">🌸</div>
+      <h3 id="rsvp-success-title">Recebido com amor!</h3>
+      <p id="rsvp-success-msg">Obrigada por confirmar! A Thaylla mal pode esperar para te ver nessa noite especial. 🎀</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-style:italic; color:var(--rose-light); margin-bottom:0.8rem;">Thaylla, 15 anos 🌸</p>
+  <p>12 · 06 · 2026 &nbsp;|&nbsp; Condomínio Raveo &nbsp;|&nbsp; 18h00</p>
+  <p style="margin-top:1rem; opacity:0.4;">feito com muito <span>amor</span> para uma noite inesquecível ✦</p>
+</footer>
+
+<script>
+// ── FLOATING PETALS ──
+const colors = ['#f9a8d4','#fb923c','#fde68a','#f472b6','#fdba74','#fef08a'];
+for (let i = 0; i < 22; i++) {
+  const p = document.createElement('div');
+  p.className = 'petal';
+  p.style.cssText = `
+    left: ${Math.random()*100}%;
+    top: ${Math.random()*100}%;
+    background: ${colors[Math.floor(Math.random()*colors.length)]};
+    width: ${8+Math.random()*10}px;
+    height: ${12+Math.random()*14}px;
+    animation-duration: ${6+Math.random()*10}s;
+    animation-delay: ${Math.random()*8}s;
+    border-radius: ${Math.random()>0.5 ? '50% 50% 50% 10%' : '50% 10% 50% 50%'};
+    position: fixed;
+    z-index: 0;
+    pointer-events: none;
+  `;
+  document.body.appendChild(p);
+}
+
+// ── COUNTDOWN ──
+function updateCountdown() {
+  const party = new Date('2026-06-12T18:00:00');
+  const now = new Date();
+  const diff = party - now;
+  if (diff <= 0) {
+    document.getElementById('cd-days').textContent = '🎉';
+    document.getElementById('cd-hours').textContent = '🎉';
+    document.getElementById('cd-mins').textContent = '🎉';
+    document.getElementById('cd-secs').textContent = '🎉';
+    return;
+  }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ── RSVP ──
+let rsvpChoice = null;
+
+function selectRSVP(choice) {
+  rsvpChoice = choice;
+  const btnYes = document.getElementById('btn-yes');
+  const btnNo  = document.getElementById('btn-no');
+  const acomp  = document.getElementById('acompanhantes-area');
+  btnYes.className = 'toggle-btn' + (choice === 'sim' ? ' selected-yes' : '');
+  btnNo.className  = 'toggle-btn' + (choice === 'nao' ? ' selected-no'  : '');
+  acomp.style.display = choice === 'sim' ? 'block' : 'none';
+}
+
+async function submitRSVP() {
+  const name  = document.getElementById('rsvp-name').value.trim();
+  const msg   = document.getElementById('rsvp-msg').value.trim();
+  const guests= document.getElementById('rsvp-guests').value.trim();
+  const errEl = document.getElementById('rsvp-error');
+  errEl.style.display = 'none';
+
+  if (!name) { showErr('Por favor, informe seu nome 🌸'); return; }
+  if (!rsvpChoice) { showErr('Nos diga se você vai comparecer!'); return; }
+
+  const btn = document.getElementById('rsvp-btn');
+  btn.disabled = true;
+  btn.textContent = 'Enviando… 🌸';
+
+  const vai = rsvpChoice === 'sim';
+  const emailBody = `
+🌸 CONFIRMAÇÃO DE PRESENÇA — 15 anos da Thaylla
+
+👤 Nome: ${name}
+${vai ? `✅ Status: VAI COMPARECER` : `❌ Status: NÃO PODERÁ COMPARECER`}
+${vai && guests ? `👥 Acompanhantes: ${guests}` : ''}
+${msg ? `💬 Mensagem: "${msg}"` : '(sem mensagem)'}
+
+— Formulário do convite digital
+  `.trim();
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: 'Você é um assistente que usa a ferramenta do Gmail para enviar e-mails. Quando receber um pedido de envio, use a ferramenta send_email do MCP do Gmail para enviar imediatamente. Não pergunte nada, apenas envie.',
+        messages: [{
+          role: 'user',
+          content: `Por favor, use a ferramenta Gmail para enviar um e-mail com as seguintes informações:\n\nPara: para o endereço de email autenticado do usuário atual (minha própria conta)\nAssunto: 🌸 Confirmação de presença - 15 anos da Thaylla (${name})\nCorpo:\n${emailBody}`
+        }],
+        mcp_servers: [{
+          type: 'url',
+          url: 'https://gmailmcp.googleapis.com/mcp/v1',
+          name: 'gmail-mcp'
+        }]
+      })
+    });
+
+    if (res.ok) {
+      showSuccess(vai, name);
+    } else {
+      // Fallback: mailto
+      sendMailtoFallback(name, vai, guests, msg, emailBody);
+    }
+  } catch(e) {
+    sendMailtoFallback(name, vai, guests, msg, emailBody);
+  }
+}
+
+function sendMailtoFallback(name, vai, guests, msg, body) {
+  const subject = encodeURIComponent(`🌸 Confirmação de presença - 15 anos da Thaylla (${name})`);
+  const bodyEnc = encodeURIComponent(body);
+  window.open(`mailto:?subject=${subject}&body=${bodyEnc}`, '_blank');
+  showSuccess(vai, name);
+}
+
+function showSuccess(vai, name) {
+  document.getElementById('rsvp-form-area').style.display = 'none';
+  const s = document.getElementById('rsvp-success');
+  s.style.display = 'block';
+  document.getElementById('rsvp-success-icon').textContent = vai ? '🎉' : '😢';
+  document.getElementById('rsvp-success-title').textContent = vai ? 'Uhuu, até lá!' : 'Que pena!';
+  document.getElementById('rsvp-success-msg').textContent = vai
+    ? `${name}, sua presença foi confirmada! A Thaylla mal pode esperar para te ver 🌸🎀`
+    : `${name}, agradecemos por avisar. Esperamos te ver numa próxima! 💕`;
+}
+
+function showErr(txt) {
+  const e = document.getElementById('rsvp-error');
+  e.textContent = txt;
+  e.style.display = 'block';
+  document.getElementById('rsvp-btn').disabled = false;
+  document.getElementById('rsvp-btn').textContent = 'Confirmar presença ✦';
+}
+
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
