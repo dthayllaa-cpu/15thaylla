@@ -796,14 +796,17 @@
       <label class="rsvp-field-label">mensagem para a Thaylla (opcional)</label>
       <textarea class="rsvp-field" id="rsvp-msg" rows="3" placeholder="Deixe um carinho para a aniversariante 💕" style="resize:none; font-family:'Lato',sans-serif;"></textarea>
 
-      <button class="rsvp-submit" id="rsvp-btn" onclick="submitRSVP()">Confirmar presença ✦</button>
+      <button class="rsvp-submit" id="rsvp-btn" onclick="submitRSVP()">
+        <svg style="width:20px;height:20px;vertical-align:middle;margin-right:8px" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.555 4.116 1.524 5.847L.057 23.882l6.187-1.443A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894a9.878 9.878 0 01-5.031-1.378l-.36-.214-3.733.871.938-3.63-.235-.374A9.859 9.859 0 012.106 12C2.106 6.58 6.58 2.106 12 2.106c5.42 0 9.894 4.474 9.894 9.894 0 5.42-4.474 9.894-9.894 9.894z"/></svg>
+        Confirmar pelo WhatsApp ✦
+      </button>
       <div class="rsvp-error" id="rsvp-error"></div>
     </div>
 
     <div class="rsvp-success" id="rsvp-success">
       <div class="rsvp-success-icon" id="rsvp-success-icon">🌸</div>
-      <h3 id="rsvp-success-title">Recebido com amor!</h3>
-      <p id="rsvp-success-msg">Obrigada por confirmar! A Thaylla mal pode esperar para te ver nessa noite especial. 🎀</p>
+      <h3 id="rsvp-success-title">Abrindo o WhatsApp!</h3>
+      <p id="rsvp-success-msg">Sua mensagem já está pronta, é só enviar 💕</p>
     </div>
   </div>
 </section>
@@ -861,7 +864,7 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// ── RSVP ──
+// ── RSVP WHATSAPP ──
 let rsvpChoice = null;
 
 function selectRSVP(choice) {
@@ -874,87 +877,45 @@ function selectRSVP(choice) {
   acomp.style.display = choice === 'sim' ? 'block' : 'none';
 }
 
-async function submitRSVP() {
-  const name  = document.getElementById('rsvp-name').value.trim();
-  const msg   = document.getElementById('rsvp-msg').value.trim();
-  const guests= document.getElementById('rsvp-guests').value.trim();
-  const errEl = document.getElementById('rsvp-error');
+function submitRSVP() {
+  const name   = document.getElementById('rsvp-name').value.trim();
+  const msg    = document.getElementById('rsvp-msg').value.trim();
+  const guests = document.getElementById('rsvp-guests').value.trim();
+  const errEl  = document.getElementById('rsvp-error');
   errEl.style.display = 'none';
 
-  if (!name) { showErr('Por favor, informe seu nome 🌸'); return; }
+  if (!name)       { showErr('Por favor, informe seu nome 🌸'); return; }
   if (!rsvpChoice) { showErr('Nos diga se você vai comparecer!'); return; }
 
-  const btn = document.getElementById('rsvp-btn');
-  btn.disabled = true;
-  btn.textContent = 'Enviando… 🌸';
-
   const vai = rsvpChoice === 'sim';
-  const emailBody = `
-🌸 CONFIRMAÇÃO DE PRESENÇA — 15 anos da Thaylla
 
-👤 Nome: ${name}
-${vai ? `✅ Status: VAI COMPARECER` : `❌ Status: NÃO PODERÁ COMPARECER`}
-${vai && guests ? `👥 Acompanhantes: ${guests}` : ''}
-${msg ? `💬 Mensagem: "${msg}"` : '(sem mensagem)'}
+  let texto = vai
+    ? `🌸 *Confirmação de Presença*\n\nOlá! Meu nome é *${name}* e confirmo que *vou comparecer* ao aniversário de 15 anos da Thaylla! 🎉`
+    : `🌸 *Confirmação de Presença*\n\nOlá! Meu nome é *${name}*. Infelizmente *não poderei comparecer* ao aniversário de 15 anos da Thaylla. 😢`;
 
-— Formulário do convite digital
-  `.trim();
+  if (vai && guests) texto += `\n👥 Acompanhantes: ${guests}`;
+  if (msg)           texto += `\n\n💬 Mensagem: _${msg}_`;
 
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: 'Você é um assistente que usa a ferramenta do Gmail para enviar e-mails. Quando receber um pedido de envio, use a ferramenta send_email do MCP do Gmail para enviar imediatamente. Não pergunte nada, apenas envie.',
-        messages: [{
-          role: 'user',
-          content: `Por favor, use a ferramenta Gmail para enviar um e-mail com as seguintes informações:\n\nPara: para o endereço de email autenticado do usuário atual (minha própria conta)\nAssunto: 🌸 Confirmação de presença - 15 anos da Thaylla (${name})\nCorpo:\n${emailBody}`
-        }],
-        mcp_servers: [{
-          type: 'url',
-          url: 'https://gmailmcp.googleapis.com/mcp/v1',
-          name: 'gmail-mcp'
-        }]
-      })
-    });
+  const numero = '5583987664367';
+  const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
 
-    if (res.ok) {
-      showSuccess(vai, name);
-    } else {
-      // Fallback: mailto
-      sendMailtoFallback(name, vai, guests, msg, emailBody);
-    }
-  } catch(e) {
-    sendMailtoFallback(name, vai, guests, msg, emailBody);
-  }
-}
-
-function sendMailtoFallback(name, vai, guests, msg, body) {
-  const subject = encodeURIComponent(`🌸 Confirmação de presença - 15 anos da Thaylla (${name})`);
-  const bodyEnc = encodeURIComponent(body);
-  window.open(`mailto:?subject=${subject}&body=${bodyEnc}`, '_blank');
-  showSuccess(vai, name);
-}
-
-function showSuccess(vai, name) {
+  // Mostrar feedback visual antes de abrir
   document.getElementById('rsvp-form-area').style.display = 'none';
   const s = document.getElementById('rsvp-success');
   s.style.display = 'block';
-  document.getElementById('rsvp-success-icon').textContent = vai ? '🎉' : '😢';
-  document.getElementById('rsvp-success-title').textContent = vai ? 'Uhuu, até lá!' : 'Que pena!';
+  document.getElementById('rsvp-success-icon').textContent = vai ? '🎉' : '💕';
+  document.getElementById('rsvp-success-title').textContent = vai ? 'Uhuu, até lá!' : 'Obrigada por avisar!';
   document.getElementById('rsvp-success-msg').textContent = vai
-    ? `${name}, sua presença foi confirmada! A Thaylla mal pode esperar para te ver 🌸🎀`
-    : `${name}, agradecemos por avisar. Esperamos te ver numa próxima! 💕`;
+    ? `${name}, o WhatsApp vai abrir com sua confirmação pronta — é só enviar! 🌸`
+    : `${name}, o WhatsApp vai abrir com sua mensagem. Esperamos te ver em breve! 💕`;
+
+  setTimeout(() => window.open(url, '_blank'), 400);
 }
 
 function showErr(txt) {
   const e = document.getElementById('rsvp-error');
   e.textContent = txt;
   e.style.display = 'block';
-  document.getElementById('rsvp-btn').disabled = false;
-  document.getElementById('rsvp-btn').textContent = 'Confirmar presença ✦';
 }
 
 // ── SCROLL REVEAL ──
