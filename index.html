@@ -788,11 +788,6 @@
         <button class="toggle-btn" id="btn-no"  onclick="selectRSVP('nao')">😢 &nbsp; Não poderei ir</button>
       </div>
 
-      <div id="acompanhantes-area" style="display:none">
-        <label class="rsvp-field-label">acompanhantes (opcional)</label>
-        <input class="rsvp-field" id="rsvp-guests" type="text" placeholder="Quantas pessoas virão com você?">
-      </div>
-
       <label class="rsvp-field-label">mensagem para a Thaylla (opcional)</label>
       <textarea class="rsvp-field" id="rsvp-msg" rows="3" placeholder="Deixe um carinho para a aniversariante 💕" style="resize:none; font-family:'Lato',sans-serif;"></textarea>
 
@@ -871,16 +866,13 @@ function selectRSVP(choice) {
   rsvpChoice = choice;
   const btnYes = document.getElementById('btn-yes');
   const btnNo  = document.getElementById('btn-no');
-  const acomp  = document.getElementById('acompanhantes-area');
   btnYes.className = 'toggle-btn' + (choice === 'sim' ? ' selected-yes' : '');
   btnNo.className  = 'toggle-btn' + (choice === 'nao' ? ' selected-no'  : '');
-  acomp.style.display = choice === 'sim' ? 'block' : 'none';
 }
 
 function submitRSVP() {
   const name   = document.getElementById('rsvp-name').value.trim();
   const msg    = document.getElementById('rsvp-msg').value.trim();
-  const guests = document.getElementById('rsvp-guests').value.trim();
   const errEl  = document.getElementById('rsvp-error');
   errEl.style.display = 'none';
 
@@ -893,13 +885,11 @@ function submitRSVP() {
     ? `🌸 *Confirmação de Presença*\n\nOlá! Meu nome é *${name}* e confirmo que *vou comparecer* ao aniversário de 15 anos da Thaylla! 🎉`
     : `🌸 *Confirmação de Presença*\n\nOlá! Meu nome é *${name}*. Infelizmente *não poderei comparecer* ao aniversário de 15 anos da Thaylla. 😢`;
 
-  if (vai && guests) texto += `\n👥 Acompanhantes: ${guests}`;
-  if (msg)           texto += `\n\n💬 Mensagem: _${msg}_`;
+  if (msg) texto += `\n\n💬 Mensagem: _${msg}_`;
 
   const numero = '5583987664367';
   const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
 
-  // Mostrar feedback visual antes de abrir
   document.getElementById('rsvp-form-area').style.display = 'none';
   const s = document.getElementById('rsvp-success');
   s.style.display = 'block';
